@@ -1,0 +1,76 @@
+.beer-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1px 150px;
+}
+
+.beer-card{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    padding: 10px 10px;
+    border-radius: 0.4rem;
+    margin: 0rem 2.3rem 2.6rem 0rem;
+    border: 1px solid #9d9d9d4a;
+
+    &:hover {
+        transition: all 0.1s ease-out;
+        box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+        top: -7px;
+        border: 1px solid #cccccc;
+      }
+}
+
+.beer-avatar {
+    display: flex;
+    width: 30%;
+    justify-content: center;
+    align-items: center;
+
+    &--image {
+        height: 124px;
+        width: 58px;
+    }
+}
+
+.beer-info{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 14px 19px;
+
+    &--name{
+        display: flex;
+    }
+
+    &--description{
+        display:flex;
+        padding: 0px 1px 7px 0px;
+    }
+}
+
+.favIcon {
+    width: 22px;
+    height: 23px;
+    position: relative;
+    align-self: flex-end;
+}
+
+.favIconButton {
+    width: 22px;
+    height: 23px;
+    align-self: flex-end;
+    background-color: transparent;
+    border: none;
+
+    &:hover, &:focus, &.focus, &:active, &.active, &:visited{
+        background-color: transparent !important;
+        border: none !important;
+    }
+}

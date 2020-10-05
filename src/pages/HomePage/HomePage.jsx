@@ -54,6 +54,14 @@ export default function HomePage(){
             return String(starFilled);
 
         } else {
+            beerData.map(beer => {
+                if (beer.id === id) {
+                    favBeer.splice(beer,1);
+                }
+                return favBeer;
+            });
+            setFavBeer([...favBeer]);
+            localStorage.setItem('favouriteBeer', JSON.stringify(favBeer)); 
             return String(starUnfilled);
         }
     }

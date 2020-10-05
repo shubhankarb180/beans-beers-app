@@ -29,7 +29,7 @@ export default function BeerContainer({ beerData, addBeer, favBeerList }) {
                                     <div className="beer-info">
                                         {
                                             checkFavIcon(beer.id) ?
-                                                <button className='favIconButton'>
+                                                <button className='favIconButton' onClick={() => addBeer(beer.id)}>
                                                     <img className="favIcon" src={starFilled} alt='favicon' id={beer.id} />
                                                 </button> :
                                                 <button className='favIconButton' onClick={() => addBeer(beer.id)}>

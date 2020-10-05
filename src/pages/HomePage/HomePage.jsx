@@ -4,6 +4,9 @@ import './HomePage.styles.scss';
 import SearchBox from '../../components/Search/searchbox.component';
 import BeerContainer from '../../components/BeerContainer/BeerContainer.component';
 
+import starUnfilled from './../../assets/starUnfilled.png';
+import starFilled from './../../assets/starUnfilled.png';
+
 export default function HomePage(){
 
     //Intializing state variable for saving beer data
@@ -31,8 +34,8 @@ export default function HomePage(){
 
     function checkForExisitingBeerInFav(id) {
         if (favBeer.length) {
-            favBeer.reduce(
-                (a, v) => (v.id === id ? true : false),
+            return favBeer.reduce(
+                (a, v) => (v.id === id ? true : a),
                 null,
             );
         }
@@ -52,10 +55,15 @@ export default function HomePage(){
                     favBeer.push(beer);
                 }
             });
+            setFavBeer([...favBeer]);
             localStorage.setItem('favouriteBeer', JSON.stringify(favBeer));
-            console.log(favBeer);   
+            console.log("Favourite Beer added : " + favBeer);   
+            return String(starFilled);
+
         } else {
             console.log("Already in array");
+            // beerData.splice;
+            return String(starUnfilled);
         }
     }
 
@@ -67,7 +75,7 @@ export default function HomePage(){
     return(
         <div className='page-content'>
             <SearchBox handleBeerSearch={handleBeerSearch} />
-            { beerData.length < 1 ? <div><h1>No Data found</h1></div> : <BeerContainer beerData={beerData} addBeer={addBeer} /> }
+            { beerData.length < 1 ? <div><h1>No Data found</h1></div> : <BeerContainer beerData={beerData} addBeer={addBeer} favBeerList={favBeer}/> }
         </div>
     );
 };

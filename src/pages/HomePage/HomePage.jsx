@@ -70,8 +70,8 @@ export default function HomePage(){
 
     //Function Call for fetching data via useEffect
     useEffect(() => {
-        fetchData()
-    },[searchtext]);
+        fetchData(searchtext)
+    });
 
     return(
         <div className='page-content'>

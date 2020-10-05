@@ -9,8 +9,8 @@ export default function HomePage(){
     //Intializing state variable for saving beer data
     const [ beerData, setbeerData] = useState([]);
     const [ searchtext, setSearchtext] = useState("");
-    const [ favBeer, setFavBeer] = useState([]);
-
+    const [favBeer, setFavBeer] = useState(localStorage.getItem('favouriteBeer') ? JSON.parse(localStorage.getItem('favouriteBeer')) : []);
+    
     //Asynchronous function for fetching beer data using fetch 
     async function fetchData(page=1) {
         try {
@@ -29,16 +29,13 @@ export default function HomePage(){
         }
     };
 
-    // get the localStorage data
-    let localData = null;
-    if(favBeer.length < 1){
-        localData = JSON.parse(localStorage.getItem('favouriteBeer'));
-    }
-
-    //In case favBeer array already has values in local storage then fetch that array and save in state so that they can be upadte in elements
-    if(localData && localData.length){
-        setFavBeer(localData);
-        console.log(favBeer);
+    function checkForExisitingBeerInFav(id) {
+        if (favBeer.length) {
+            favBeer.reduce(
+                (a, v) => (v.id === id ? true : false),
+                null,
+            );
+        }
     }
 
     //Beer Search Handler
@@ -49,14 +46,17 @@ export default function HomePage(){
 
     //Adds beer in the favBeer list and updated the same in the local storage
     function addBeer(id){
-        beerData.map(beer => {
-            if(beer.id === id){
-                favBeer.push(beer);
-            }
-            return favBeer;
-        });
-        localStorage.setItem('favouriteBeer', JSON.stringify(favBeer));
-        console.log(favBeer);
+        if (!checkForExisitingBeerInFav(id)) {
+            beerData.map(beer => {
+                if (beer.id === id) {
+                    favBeer.push(beer);
+                }
+            });
+            localStorage.setItem('favouriteBeer', JSON.stringify(favBeer));
+            console.log(favBeer);   
+        } else {
+            console.log("Already in array");
+        }
     }
 
     //Function Call for fetching data via useEffect

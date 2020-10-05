@@ -14,7 +14,6 @@ export default function HomePage(){
     const [favBeer, setFavBeer] = useState(localStorage.getItem('favouriteBeer') ? JSON.parse(localStorage.getItem('favouriteBeer')) : []);
     
     async function fetchData(page=1) {
-        try {
             let apiCall = null;
             if(searchtext === ""){
                 apiCall = await fetch(`https://api.punkapi.com/v2/beers?${page}&per_page=24`);
@@ -24,10 +23,6 @@ export default function HomePage(){
             }
             const beers = await apiCall.json();
             setbeerData(beers);
-        }
-        catch(err){
-            console.log("Error Message : " + err);
-        }
     };
 
     function checkForExisitingBeerInFav(id) {
@@ -55,12 +50,10 @@ export default function HomePage(){
                 return favBeer;
             });
             setFavBeer([...favBeer]);
-            localStorage.setItem('favouriteBeer', JSON.stringify(favBeer));
-            console.log("Favourite Beer added : " + favBeer);   
+            localStorage.setItem('favouriteBeer', JSON.stringify(favBeer)); 
             return String(starFilled);
 
         } else {
-            console.log("Already in array");
             return String(starUnfilled);
         }
     }

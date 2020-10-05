@@ -14,7 +14,7 @@ const App = () => {
         <PageHeader />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/favourites" component={FavouritesPage} />
+          <Route exact path="/favourites" component={FavouritesPage} />
         </Switch>
       </div>
   );

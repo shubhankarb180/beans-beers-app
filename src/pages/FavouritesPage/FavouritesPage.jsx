@@ -16,8 +16,8 @@ export default function FavouritesPage(){
         });
         setfavouriteBeers([...favBeers]);
         localStorage.setItem('favouriteBeer',JSON.stringify(favouriteBeers));
-        console.log(favouriteBeers);
     }
+    
     return(
         <div>
             <Row gutter={{ xs: 16, sm: 16, md: 16, lg: 16 }}>

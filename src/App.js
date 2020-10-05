@@ -6,7 +6,6 @@ import HomePage from './pages/HomePage/HomePage';
 import FavouritesPage from './pages/FavouritesPage/FavouritesPage';
 import PageHeader from './components/PageHeader/pageHearder.component';
 
-// const { Content, Header, Footer } = Layout;
 
 const App = () => {
 

@@ -9,12 +9,10 @@ import starFilled from './../../assets/starUnfilled.png';
 
 export default function HomePage(){
 
-    //Intializing state variable for saving beer data
     const [ beerData, setbeerData] = useState([]);
     const [ searchtext, setSearchtext] = useState("");
     const [favBeer, setFavBeer] = useState(localStorage.getItem('favouriteBeer') ? JSON.parse(localStorage.getItem('favouriteBeer')) : []);
     
-    //Asynchronous function for fetching beer data using fetch 
     async function fetchData(page=1) {
         try {
             let apiCall = null;
@@ -41,13 +39,13 @@ export default function HomePage(){
         }
     }
 
-    //Beer Search Handler
+    
     function handleBeerSearch(filter) {
         setSearchtext(filter);
     }
     
 
-    //Adds beer in the favBeer list and updated the same in the local storage
+
     function addBeer(id){
         if (!checkForExisitingBeerInFav(id)) {
             beerData.map(beer => {
@@ -63,12 +61,11 @@ export default function HomePage(){
 
         } else {
             console.log("Already in array");
-            // beerData.splice;
             return String(starUnfilled);
         }
     }
 
-    //Function Call for fetching data via useEffect
+    
     useEffect(() => {
         fetchData(searchtext)
     });

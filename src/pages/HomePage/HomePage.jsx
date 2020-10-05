@@ -30,7 +30,10 @@ export default function HomePage(){
     };
 
     // get the localStorage data
-    const localData = JSON.parse(localStorage.getItem('favouriteBeer'));
+    let localData = null;
+    if(favBeer.length < 1){
+        localData = JSON.parse(localStorage.getItem('favouriteBeer'));
+    }
 
     //In case favBeer array already has values in local storage then fetch that array and save in state so that they can be upadte in elements
     if(localData && localData.length){
@@ -50,6 +53,7 @@ export default function HomePage(){
             if(beer.id === id){
                 favBeer.push(beer);
             }
+            return favBeer;
         });
         localStorage.setItem('favouriteBeer', JSON.stringify(favBeer));
         console.log(favBeer);

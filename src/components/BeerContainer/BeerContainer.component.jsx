@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Row, Col, Divider } from 'antd';
+import React from 'react';
+import { Row, Col} from 'antd';
 import './BeerContainer.styles.scss';
 import starUnfilled from './../../assets/starUnfilled.png';
 import starFilled from './../../assets/starFilled.png';
@@ -21,7 +21,7 @@ export default function BeerContainer({ beerData, addBeer, favBeerList }) {
                 <Row gutter={{ xs: 16, sm: 16, md: 16, lg: 16 }}>
                     {
                         beerData.map((beer) =>
-                            <Col className="gutter-row" xs={24} sm={24} md={24} lg={24} xl={8}>
+                            <Col key={beer.id} className="gutter-row" xs={24} sm={24} md={24} lg={24} xl={8}>
                                 <div className='beer-card' key={beer.id}>
                                     <div className="beer-avatar">
                                         <img className='beer-avatar--image' src={beer.image_url} alt="avatar" />

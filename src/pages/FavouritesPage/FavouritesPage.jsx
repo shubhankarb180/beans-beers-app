@@ -12,6 +12,7 @@ export default function FavouritesPage(){
             if(data.id === id){
                 favBeers.splice(data,1);
             }
+            return favBeers;
         });
         setfavouriteBeers([...favBeers]);
         localStorage.setItem('favouriteBeer',JSON.stringify(favouriteBeers));

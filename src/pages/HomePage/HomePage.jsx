@@ -54,6 +54,7 @@ export default function HomePage(){
                 if (beer.id === id) {
                     favBeer.push(beer);
                 }
+                return favBeer;
             });
             setFavBeer([...favBeer]);
             localStorage.setItem('favouriteBeer', JSON.stringify(favBeer));

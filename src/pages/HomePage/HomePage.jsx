@@ -35,10 +35,7 @@ export default function HomePage(){
     //In case favBeer array already has values in local storage then fetch that array and save in state so that they can be upadte in elements
     if(localData && localData.length){
         setFavBeer(localData);
-    }
-
-    function addBeer(id) {
-        console.log("It exits " + beerData[id]);
+        console.log(favBeer);
     }
 
     //Beer Search Handler
@@ -46,6 +43,8 @@ export default function HomePage(){
         setSearchtext(filter);
     }
     
+
+    //Adds beer in the favBeer list and updated the same in the local storage
     function addBeer(id){
         beerData.map(beer => {
             if(beer.id === id){

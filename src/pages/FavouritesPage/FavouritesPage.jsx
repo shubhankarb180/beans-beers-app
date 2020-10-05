@@ -1,45 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 
 export default function FavouritesPage(){
 
-    const[favouriteBeers, setfavouriteBeers] = useState([]);
-
-    function fetchFavBeerList(){
-        const localData = JSON.parse(localStorage.getItem('favouriteBeer'));
-        if(localData && localData.length){
-            setfavouriteBeers(localData);
-        }
-        else {
-            setfavouriteBeers([]);
-        }
-    }
-
-    useEffect(() => {
-        fetchFavBeerList()
-    },[favouriteBeers]);
+    const[favouriteBeers, setfavouriteBeers] = useState(localStorage.getItem('favouriteBeer') ? JSON.parse(localStorage.getItem('favouriteBeer')) : []);
 
     function deleteBeer(id) {
-        let newData = favouriteBeers;
-        newData.map((data) => {
+        let favBeers = favouriteBeers;
+        favBeers.map((data) => {
             if(data.id === id){
-                data.splice(id,1);
+                favBeers.splice(data,1);
             }
         });
-        setfavouriteBeers(newData);
+        setfavouriteBeers(favBeers);
         localStorage.setItem('favouriteBeer',JSON.stringify(favouriteBeers));
+        console.log(favouriteBeers);
     }
 
-    return(
-        <div>
+    if( favouriteBeers) {
+        return(
+            <div>      
             {
-                favouriteBeers.map((beer) => 
-                    <div key={beer.id}>
-                        <h3>{beer.name}</h3>
-                        <p>{beer.description}</p>
-                        <button onClick={() => deleteBeer(beer.id)}>Delete</button>
-                    </div>
-                )
+                    favouriteBeers.map((beer) => 
+                        <div key={beer.id}>
+                            <h3>{beer.name}</h3>
+                            <p>{beer.description}</p>
+                            <button onClick={() => deleteBeer(beer.id)}>Delete</button>
+                        </div>
+                    )
             }
-        </div>
-    );
+            </div>
+        );
+    }
+    else{
+        return(<h1>No Favourite Beer</h1>);
+    }
 };

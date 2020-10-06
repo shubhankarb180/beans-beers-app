@@ -19,3 +19,24 @@
     background-color:#52eac4 ;
     color:white;
 }
+
+@media only screen and (max-width: 600px){
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        background-color:#52eac4 ;
+        color:white;
+        padding-bottom: 65px;
+    
+        &--title {
+            background-color:#52eac4 ;
+            font-size: 100%;
+            width: 55%;
+        }
+    
+        &--links {
+            background-color:#52eac4 ;
+            width: 10%;
+        }
+    }
+}

@@ -73,3 +73,10 @@
         border: none !important;
     }
 }
+
+.pagination-buttons {
+    padding: 1% 0%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

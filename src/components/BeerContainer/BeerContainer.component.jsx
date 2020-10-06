@@ -4,7 +4,7 @@ import './BeerContainer.styles.scss';
 import starUnfilled from './../../assets/starUnfilled.png';
 import starFilled from './../../assets/starFilled.png';
 
-export default function BeerContainer({ beerData, addBeer, favBeerList, pageCounter }) {
+export default function BeerContainer({ beerData, addBeer, favBeerList, pageCounter, page }) {
     const checkFavIcon = (id) => {
         if (favBeerList.length) {
             return favBeerList.reduce(
@@ -48,7 +48,7 @@ export default function BeerContainer({ beerData, addBeer, favBeerList, pageCoun
             {
                 beerData.length < 24 ? '' :
                     <div className='pagination-buttons'>
-                        <Button type='primary' onClick={() => pageCounter(false)}>Prev</Button>
+                        { page === 1 ? null: <Button type='primary' onClick={() => pageCounter(false)}>Prev</Button>}
                         <Button type='primary' onClick={() => pageCounter(true)}>Next</Button>
                     </div>
             }

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Row, Col} from 'antd';
+import { Row, Col, Button } from 'antd';
 import './BeerContainer.styles.scss';
 import starUnfilled from './../../assets/starUnfilled.png';
 import starFilled from './../../assets/starFilled.png';
 
-export default function BeerContainer({ beerData, addBeer, favBeerList }) {
+export default function BeerContainer({ beerData, addBeer, favBeerList, pageCounter }) {
     const checkFavIcon = (id) => {
         if (favBeerList.length) {
             return favBeerList.reduce(
@@ -44,6 +44,13 @@ export default function BeerContainer({ beerData, addBeer, favBeerList }) {
                         )
                     }
                 </Row>
+            }
+            {
+                beerData.length < 24 ? '' :
+                    <div className='pagination-buttons'>
+                        <Button type='primary' onClick={() => pageCounter(false)}>Prev</Button>
+                        <Button type='primary' onClick={() => pageCounter(true)}>Next</Button>
+                    </div>
             }
         </div>
     );

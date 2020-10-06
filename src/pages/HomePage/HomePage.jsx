@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 
 import './HomePage.styles.scss';
+import {Empty} from 'antd';
 import SearchBox from '../../components/Search/searchbox.component';
 import BeerContainer from '../../components/BeerContainer/BeerContainer.component';
+import Loading from '../../components/Loading/Loading.component';
 
 import starUnfilled from './../../assets/starUnfilled.png';
 import starFilled from './../../assets/starUnfilled.png';
@@ -12,17 +14,20 @@ export default function HomePage(){
     const [ beerData, setbeerData] = useState([]);
     const [ searchtext, setSearchtext] = useState("");
     const [favBeer, setFavBeer] = useState(localStorage.getItem('favouriteBeer') ? JSON.parse(localStorage.getItem('favouriteBeer')) : []);
+    const [ page , setPage ] = useState(1);
     
-    async function fetchData(page=1) {
+    async function fetchData() {
             let apiCall = null;
-            if(searchtext === ""){
-                apiCall = await fetch(`https://api.punkapi.com/v2/beers?${page}&per_page=24`);
+            if(searchtext === "" && page){
+                apiCall = await fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=24`);
+                console.log(page)
             }
             else {
-                apiCall = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${searchtext}&per_page=24`);
+                apiCall = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${searchtext}&page=${page}&per_page=24`);
             }
             const beers = await apiCall.json();
             setbeerData(beers);
+            console.log("re-render")
     };
 
     function checkForExisitingBeerInFav(id) {
@@ -37,6 +42,18 @@ export default function HomePage(){
     
     function handleBeerSearch(filter) {
         setSearchtext(filter);
+        setPage(1);
+    }
+
+    function pageCounter(decision){
+        if(beerData.length > 23){
+            if (decision === true){
+                setPage(page + 1);
+            }
+            else{
+                setPage(page - 1);
+            }
+        }     
     }
     
 
@@ -68,13 +85,20 @@ export default function HomePage(){
 
     
     useEffect(() => {
-        fetchData(searchtext)
-    });
+        fetchData()
+    },[searchtext,page]);
 
     return(
         <div className='page-content'>
             <SearchBox handleBeerSearch={handleBeerSearch} />
-            { beerData.length < 1 ? <div><h1>No Data found</h1></div> : <BeerContainer beerData={beerData} addBeer={addBeer} favBeerList={favBeer}/> }
+            { beerData.length < 1 && searchtext !== "" ? <Empty /> : beerData.length < 1 ? <Loading /> :
+                <BeerContainer 
+                    beerData={[...beerData]} 
+                    addBeer={addBeer} f
+                    favBeerList={favBeer}
+                    pageCounter={pageCounter}
+                    page={page}
+                /> }
         </div>
     );
 };

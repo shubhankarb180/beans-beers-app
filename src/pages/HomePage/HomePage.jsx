@@ -20,14 +20,12 @@ export default function HomePage(){
             let apiCall = null;
             if(searchtext === "" && page){
                 apiCall = await fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=24`);
-                console.log(page)
             }
             else {
                 apiCall = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${searchtext}&page=${page}&per_page=24`);
             }
             const beers = await apiCall.json();
             setbeerData(beers);
-            console.log("re-render")
     };
 
     function checkForExisitingBeerInFav(id) {
